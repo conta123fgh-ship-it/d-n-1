@@ -1,7 +1,9 @@
 import os, datetime, urllib.request, json
 
-api_key = os.environ.get("GEMINI_API_KEY")
-url = f"https://googleapis.com{api_key}"
+k = os.environ.get("GEMINI_API_KEY", "").strip()
+u = "https://googleapis.com"generativelanguage.
+p = "/v1beta/models/gemini-2.5-flash:generateContent"
+url = f"{u}{p}?key={k}"
 
 prompt = "Viết bản tin tóm tắt 3 mẹo lập trình hay hôm nay bằng tiếng Việt."
 
