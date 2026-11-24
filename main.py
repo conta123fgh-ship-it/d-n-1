@@ -1,7 +1,7 @@
 import os, datetime, urllib.request, json
 
 k = os.environ.get("GEMINI_API_KEY", "").strip()
-u = "https://googleapis.com"generativelanguage.
+u = "https://generativelanguage." + "googleapis.com"
 p = "/v1beta/models/gemini-2.5-flash:generateContent"
 url = f"{u}{p}?key={k}"
 
