@@ -1,0 +1,36 @@
+name: AI Tu Dong
+
+on:
+  # 1. Tự động chạy định kỳ mỗi 6 tiếng (bạn có thể chỉnh lại giờ)
+  schedule:
+    - cron: '0 */6 * * *'
+  # 2. Cho phép bấm nút Run workflow để chạy ngay lập tức
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-ai:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tai ma nguon
+        uses: actions/checkout@v4
+
+      - name: Cai dat Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Chay AI
+        env:
+          # Nếu code dùng API Key lưu trong Settings -> Secrets, hãy bỏ dấu # ở dòng dưới
+          # API_KEY: ${{ secrets.API_KEY }}
+        run: python main.py
+
+      - name: Luu ket qua
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Cap nhat tu dong" && git push)
